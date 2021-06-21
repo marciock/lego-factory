@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    
-      <LegoDrop />
+   
+     <ChavePrincipal :quantidade="8" />
    
   </div>
 </template>
@@ -13,11 +13,23 @@ import '@popperjs/core/dist/umd/popper.js';
 import 'bootstrap/dist/js/bootstrap.js';
  import './assets/style/lego.css';
 
-import LegoDrop from './components/LegoDrop.vue';
+
+import ChavePrincipal from './components/chaves/ChavePrincipal.vue';
 export default {
   name: 'App',
   components: {
-   LegoDrop
+    ChavePrincipal
+  },
+  props:['campeonato'],
+  methods:{
+    teste(){
+       const div=this.campeonato;
+
+       console.log(div)
+    }
+  },
+  mounted(){
+    this.teste();
   }
 }
 </script>
