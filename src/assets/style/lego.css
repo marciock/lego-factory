@@ -1,0 +1,17 @@
+.player{
+    width: 8em;
+    
+}
+.point{
+    width: 4em;
+}
+.piece-height{
+    height: 2em;
+}
+.lego-height{
+    height: 3em;
+}
+.lego-wrapper{
+    display: flex;
+    grid-template-columns: 5em 2em 2em;
+}
