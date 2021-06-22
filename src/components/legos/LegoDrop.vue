@@ -13,8 +13,8 @@
         <div class="lego-wrapper">
            
                 <div class="form-group lego-height">
-                   <select class="form-select player" data-id="jogador1" >
-                     <option  v-for="j in jogadores " :key="j.id" :value="j.id">{{j.nome}}</option>
+                   <select class="form-control player" data-id="jogador1" >
+                     <option  v-for="(j,i) in jogadores " :key="i" :value="j.id">{{j.nome}}</option>
 
                    </select>
                 </div>
@@ -28,8 +28,8 @@
          <div class="lego-wrapper">
            
                 <div class="form-group lego-height" v-show="oculta !=='none'" >
-                 <select class="form-select player" data-id="jogador2" >
-                   <option v-for="j in jogadores " :key="j.id" :value="j.id">{{j.nome}}</option>
+                 <select class="form-control player" data-id="jogador2" >
+                   <option v-for="(j,i) in jogadores " :key="i" :value="j.id">{{j.nome}}</option>
                  </select>
                 </div>
         
@@ -66,8 +66,10 @@ export default {
       ...mapActions(['rodadaAction','jogadoresAction','campeonatoAction']),
       carregaJogador(){
        
+       const data={torneio:11}
         const url='instituicao/jogadores.php';
-        this.jogadoresAction(url);
+        const payload={url:url,data:data}
+        this.jogadoresAction(payload);
       }
     },
     created(){

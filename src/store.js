@@ -8,6 +8,7 @@ export default new Vuex.Store({
         rodadas:'',
         campeonato:'',
         jogadores:[],
+        qtd:''
 
 
     },
@@ -20,6 +21,9 @@ export default new Vuex.Store({
         },
         mutCampeonato(state,campeonatoAction){
             state.campeonato=campeonatoAction
+        },
+        mutQtd(state,qtdAction){
+            state.qtd=qtdAction;
         }
     },
     actions:{
@@ -32,11 +36,11 @@ export default new Vuex.Store({
         jogadoresAction:async ({commit},payload)=>{
 
           
-                
-            const url=payload;
+             const data=payload.data;   
+            const url=payload.url;
    
           //  let headers=new Headers({'Content-type':'application/json;charset=utf-8'});
-           let result= await Vue.http.post(url,{torneio:'11'});
+           let result= await Vue.http.post(url,data);
 
            console.log(result.data)
            commit('mutJogadores',result.data);
@@ -44,6 +48,9 @@ export default new Vuex.Store({
         campeonatoAction({commit},payload){
 
             commit('mutCampeonato',payload);
+        },
+        qtdAction({commit}){
+            commit('mutQtd',localStorage.getItem('qtd'));
         }
     }
 });
