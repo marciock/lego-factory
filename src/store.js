@@ -3,7 +3,8 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 export default new Vuex.Store({
-
+    
+    strict:process.env.NODE_ENV !== 'production',
     state:{
         rodadas:'',
         campeonato:'',
@@ -13,6 +14,7 @@ export default new Vuex.Store({
 
     },
     mutations:{
+
         mutRodada(state,rodadaAction){
             state.rodadas=rodadaAction
         },
@@ -22,8 +24,12 @@ export default new Vuex.Store({
         mutCampeonato(state,campeonatoAction){
             state.campeonato=campeonatoAction
         },
-        mutQtd(state,qtdAction){
-            state.qtd=qtdAction;
+        mutQtd(state){
+            if(localStorage.getItem('qtd')){
+                this.replaceState(
+                    Object.assign(state,JSON.parse(localStorage.getItem('qtd')))
+                )
+            }
         }
     },
     actions:{
@@ -39,18 +45,17 @@ export default new Vuex.Store({
              const data=payload.data;   
             const url=payload.url;
    
+           // console.log(data);
           //  let headers=new Headers({'Content-type':'application/json;charset=utf-8'});
            let result= await Vue.http.post(url,data);
 
-           console.log(result.data)
+          
            commit('mutJogadores',result.data);
         },
         campeonatoAction({commit},payload){
 
             commit('mutCampeonato',payload);
         },
-        qtdAction({commit}){
-            commit('mutQtd',localStorage.getItem('qtd'));
-        }
+       
     }
 });

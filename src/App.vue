@@ -1,7 +1,7 @@
 <template>
   <div id="app">
    
-     <ChavePrincipal :quantidade="qtd" />
+     <ChavePrincipal :quantidade="store.qtd" />
    
   </div>
 </template>
@@ -12,8 +12,7 @@ import 'font-awesome/css/font-awesome.css';
 import '@popperjs/core/dist/umd/popper.js';
 import 'bootstrap/dist/js/bootstrap.js';*/
  import './assets/style/lego.css';
-import {mapState} from 'vuex';
-import {mapActions} from 'vuex';
+
 
 import ChavePrincipal from './components/chaves/ChavePrincipal.vue';
 export default {
@@ -21,16 +20,28 @@ export default {
   components: {
     ChavePrincipal
   },
+  data:()=>{
+    return{
+      store:'',
+      
+    }
+  },
   computed:{
-    ...mapState(['qtd'])
+    
   },
-  props:['campeonato'],
-  methods:{
-   ...mapActions(['qtdAction'])
+  
+  
+  mounted(){
+    if(localStorage.getItem('store')){
+      this.store=JSON.parse(localStorage.getItem('store'));
+      
+    }
+
+    
+
   },
-  created(){
-    this.qtdAction();
-  }
+ 
+ 
 }
 </script>
 
