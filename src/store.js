@@ -9,12 +9,13 @@ export default new Vuex.Store({
         rodadas:'',
         campeonato:'',
         jogadores:[],
-        qtd:''
+        qtd:'',
+        
 
 
     },
     mutations:{
-
+        
         mutRodada(state,rodadaAction){
             state.rodadas=rodadaAction
         },
@@ -59,6 +60,18 @@ export default new Vuex.Store({
 
             commit('mutCampeonato',payload);
         },
+        salvaRodada(context,payload){
+
+            const data=payload;
+
+            console.log(data);
+
+            Vue.http.post('instituicao/salvapartida.php',data).then(res=>{
+                console.log(res);
+            });
+
+            
+        }
         
        
     }
