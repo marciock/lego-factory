@@ -44,18 +44,22 @@ export default new Vuex.Store({
           
              const data=payload.data;   
             const url=payload.url;
-   
-           // console.log(data);
-          //  let headers=new Headers({'Content-type':'application/json;charset=utf-8'});
+
+          
+           if(data.torneio !==undefined){
+        
            let result= await Vue.http.post(url,data);
 
           
            commit('mutJogadores',result.data);
+           } 
+           
         },
         campeonatoAction({commit},payload){
 
             commit('mutCampeonato',payload);
         },
+        
        
     }
 });

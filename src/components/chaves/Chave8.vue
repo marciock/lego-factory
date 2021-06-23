@@ -19,7 +19,7 @@
 
         
             
-            <LegoDrop :rodada="5" referencia="[1,2]"/>
+            <LegoDrop :rodada="5" :referencia1="1" :referencia2="2"/>
         
             <LegoColchets />
              <LegoCurveDown />
@@ -35,10 +35,10 @@
 
              <LegoSpace />
              
-              <LegoDrop :rodada="7" :refrencia="[5,6]"/>
+              <LegoDrop :rodada="7" :refrencia1="5" :referencia2="6"/>
                <LegoColchets />
 
-             <LegoDrop :rodada="8" :refrencia="[7,7]" oculta="none"/>
+             <LegoDrop :rodada="8" :refrencia1="7" :referencia2="7" oculta="none"/>
         
     </div>
     <div class="lego-keys">
@@ -47,7 +47,7 @@
       
           <LegoColchets />
 
-           <LegoDrop :rodada="6"  :refrencia="[3,4]"/>
+           <LegoDrop :rodada="6"  :refrencia1="3" :referencia2="4"/>
       
           <LegoColchets />
           <LegoCurveUp />

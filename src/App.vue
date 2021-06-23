@@ -12,7 +12,7 @@ import 'font-awesome/css/font-awesome.css';
 import '@popperjs/core/dist/umd/popper.js';
 import 'bootstrap/dist/js/bootstrap.js';*/
  import './assets/style/lego.css';
-
+//store.qtd
 
 import ChavePrincipal from './components/chaves/ChavePrincipal.vue';
 export default {
@@ -36,7 +36,7 @@ export default {
       this.store=JSON.parse(localStorage.getItem('store'));
       
     }
-
+    
     
 
   },

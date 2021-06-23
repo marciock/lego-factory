@@ -17,7 +17,7 @@ export default {
    campeonato:Number
    },
     mounted(){
-        console.log(this.campeonato)
+       
     }
 
    

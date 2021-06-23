@@ -1,10 +1,11 @@
 <template>
-    <div>
+    <div >
      <div class="lego-keys">
       
         <LegoDrop :rodada="1"/>
      
         <LegoColchets />
+        <LegoCurveDown />
       
     </div>
     <div class="lego-keys">
@@ -14,18 +15,17 @@
         
             <LegoColchets />
        
-       
         
-            <LegoDrop :rodada="3" />
+            <LegoDrop :rodada="3" :referencia1="1" :referencia2="2" />
         
             <LegoColchets />
         
         
       <div class="lego-keys">
         
-          <LegoDrop :rodada="4" oculta="none"/>
+          <LegoDrop :rodada="4" oculta="none" :referencia1="3" :referencia2="3"/>
       
-          <LegoColchets />
+          
         
       </div>
     </div>
@@ -34,13 +34,16 @@
 <script>
 import LegoDrop from '../legos/LegoDrop.vue';
 import LegoColchets from '../legos/LegoColchets.vue';
+import LegoCurveDown from '../legos/LegoCurveDown.vue';
 
 
 export default {
 
    name:'Chave4',
    components:{
-       LegoColchets,LegoDrop
+       LegoColchets,
+       LegoDrop,
+       LegoCurveDown
    }
        
 }
