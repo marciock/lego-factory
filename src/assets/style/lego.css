@@ -1,23 +1,23 @@
 .player{
-    width: 6em;
+    width: 10rem;
     
 }
 .point{
-    width: 4em;
+    width: 4rem;
 }
 .piece-height{
-    height: 2em;
+    height: 4rem;
 }
 .lego-height{
-    height: 3em;
+    height: 3rem;
 }
 .lego-wrapper{
     display: flex;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 6fr 3fr;
 }
 .lego-keys{
     display: flex;
-    grid-template-columns: repeat(auto-fit,minmax(1fr,3fr));
+    grid-template-columns: repeat(auto-fit,minmax(2fr,6fr));
 }
 .border-top-1{
     border-top:1px solid #000 !important;
@@ -32,4 +32,9 @@
 }
 .lego-space{
     padding: 20px;
+}
+.toast-message{
+    position: absolute;
+    z-index: 9;
+
 }

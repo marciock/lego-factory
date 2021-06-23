@@ -5,13 +5,14 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode prod",
-    "lib":"vue-cli-service build --target lib --name myLib 'src/App.vue'",
+    "lib": "vue-cli-service build --target lib --name myLib 'src/App.vue'",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "bootstrap": "^5.0.1",
     "core-js": "^3.6.5",
     "font-awesome": "^4.7.0",
+    "v-mask": "^2.2.4",
     "vue": "^2.6.11",
     "vue-resource": "^1.5.3",
     "vue-router": "^3.5.1",

@@ -1,5 +1,6 @@
 <template>
     <div>
+        
         <div class="lego-wrapper">
             <div class="lego-height lego-space border-right-1">
                
@@ -47,6 +48,7 @@
                
             </div>
         </div>
+        
         
        
     </div>

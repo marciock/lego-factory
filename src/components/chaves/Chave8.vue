@@ -34,11 +34,12 @@
              <LegoCurveDown />
 
              <LegoSpace />
+             <LegoSpace />  
              
-              <LegoDrop :rodada="7" :refrencia1="5" :referencia2="6"/>
+              <LegoDrop :rodada="7" :referencia1="5" :referencia2="6"/>
                <LegoColchets />
 
-             <LegoDrop :rodada="8" :refrencia1="7" :referencia2="7" oculta="none"/>
+             <LegoDrop :rodada="8" :referencia1="7" :referencia2="7" oculta="none"/>
         
     </div>
     <div class="lego-keys">
@@ -47,7 +48,7 @@
       
           <LegoColchets />
 
-           <LegoDrop :rodada="6"  :refrencia1="3" :referencia2="4"/>
+           <LegoDrop :rodada="6"  :referencia1="3" :referencia2="4"/>
       
           <LegoColchets />
           <LegoCurveUp />
@@ -56,6 +57,8 @@
 </div>
 </template>
 <script>
+
+
 import LegoDrop from '../legos/LegoDrop.vue';
 import LegoColchets from '../legos/LegoColchets.vue';
 import LegoCurveDown from '../legos/LegoCurveDown.vue';
