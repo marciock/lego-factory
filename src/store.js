@@ -66,13 +66,19 @@ export default new Vuex.Store({
 
             
         },
-        carregaRodada: async ({commit},payload)=>{
+        carregaRodada({commit},payload){
 
             const data=payload;
-            let result =await Vue.http.post('instituicao/carrega_rodada.php',data);
+            Vue.http.post('instituicao/carrega_rodada.php',data).then(res=>{
 
-            //console.log(result.body);
-            commit('mutCarregamento',result.body);
+                commit('mutCarregamento',res.body);
+                console.log(res.body);
+            });
+
+           // console.log(result.data);
+           
+              
+            
         }
         
        

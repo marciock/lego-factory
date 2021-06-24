@@ -29,6 +29,17 @@ export default {
        store:''
      }
    },
+   methods:{
+     
+   },
+   mounted(){
+
+      
+
+    
+      
+   }
+
    
 
    

@@ -14,7 +14,7 @@
            
                 <div class="form-group lego-height">
                    <select class="form-control player" data-id="jogador1" ref="jogador1" :anterior="referencia1" >
-                     <option value="0"></option>
+                     <option :value="jogo.jogador1">{{textPlayer1}}</option>
                      <option  v-for="(j,i) in jogadores " :key="i" :value="j.id">{{j.nome}}</option>
                      
 
@@ -33,7 +33,7 @@
            
                 <div class="form-group lego-height" v-show="oculta !=='none'" >
                  <select class="form-control player" data-id="jogador2"  ref="jogador2" :anterior="referencia2"  >
-                    <option value="0"></option>
+                    <option :value="jogo.jogador2">{{textPlayer2}}</option>
                    <option v-for="(j,i) in jogadores " :key="i" :value="j.id">{{j.nome}}</option>
                    
                  </select>
@@ -49,7 +49,7 @@
          </div>
          <div class="lego-wrapper lego-height">
                <div class="form-group player">
-                 <input type="datetime-local" class="form-control player" ref="dateTime" v-model="jogo.data" >
+                 <input type="datetime-local" class="form-control player" ref="dateTime" v-model="jogo.data"  >
                 
                 </div>
     
@@ -58,9 +58,10 @@
                         <span class="fa fa-save"> </span>
                     </button>
                 </div>
+                
          </div>
          <toast-message :title="titleToast" :message="messagegeToast" v-show="timeToast===true" :posX="toastX" :posY="toastY"/>
-
+          {{this.jogo.data}}
     </div>
 </template>
 <script>
@@ -81,6 +82,7 @@ export default {
       referencia2:Number,
       campeonatos:Number,
       anterior:Number,
+      carregamento:{}
       
       },
       data:()=>{
@@ -100,7 +102,11 @@ export default {
           messagegeToast:'',
           timeToast:Boolean,
           toastX:'',
-          toastY:''
+          toastY:'',
+          textPlayer1:'',
+          textPlayer2:'',
+          pointPlayer1:'',
+          pointPlayer2:''
 
                   
          
@@ -179,30 +185,80 @@ export default {
             this.jogo.jogador1=this.$refs.jogador1.value;
             this.jogo.jogador2=this.$refs.jogador2.value;
 
-            this.titleToast='Salvando Rodada - '+this.rodada;
-            this.messagegeToast='Rodada salva com sucesso';
+           
+             this.salvaRodada(this.jogo);
 
-            console.log(this.jogo);
-
-            this.salvaRodada(this.jogo);
+           
 
             if(btn.classList.contains('btn-success')){
-
+              
                 this.timeToast=true;
                 this.toastX=btn.left;
                 this.toastY=btn.top;
 
-               // console.log(this.titleToast);
+           
                 btn.classList.remove('btn-success');
                 btn.classList.add('btn-dark');
-             //  btn.setAttribute('disabled','');
+            
+                 this.titleToast='Salvando Rodada - '+this.rodada;
+                 this.messagegeToast='Rodada salva com sucesso';
 
                 setTimeout(()=>{
+                    this.timeToast=false;
+                },2000)
+            }else{
+
+                //  this.salvaRodada(this.jogo);
+                this.timeToast=true;
+                this.toastX=btn.left;
+                this.toastY=btn.top;
+
+                 this.titleToast='Salvando Rodada - '+this.rodada;
+                 this.messagegeToast='Rodada atualizada com sucesso';
+                 setTimeout(()=>{
                     this.timeToast=false;
                 },2000)
             }
          
       },
+      open(){
+
+      //  if(this.jogadores !==[]){
+        this.jogadores.forEach(f => {
+
+          if(f.jogador1 !==undefined){
+
+            this.textPlayer1=f.nome;
+            this.jogo.jogador1=f.jogador1;
+          
+            this.jogo.pontos1=f.pontos1;
+            this.$refs.pontos2.value=f.pontos2
+
+          }
+          if(f.jogador2 !==undefined){
+
+            this.textPlayer2=f.nome;
+            this.jogo.jogador2=f.jogador2;
+             this.jogo.ponto2=f.pontos2;
+             this.$refs.pontos2.value=f.pontos2
+          }
+
+          let today = new Date(f.data);
+            let date = today.getFullYear() + '-' +
+             (today.getMonth() + 1).toString().padStart(2, '0') + '-' +
+               today.getDate().toString().padStart(2, '0');
+            let time = today.getHours().toString().padStart(2, '0') + ':' + today.getMinutes().toString().padStart(2, '0');
+              let juntaData=date + 'T' + time;
+             this.jogo.data=juntaData;
+
+             this.$refs.data.value=juntaData;
+
+        
+          
+        })
+
+       // }
+      }
       
     },
     mounted(){
@@ -211,17 +267,19 @@ export default {
       this.store=JSON.parse(localStorage.getItem('store'));
       
     }
-
+      
       
      this.jogo.rodada=`${this.rodada}`;
      this.jogo.campeonato=`${this.store.torneio}`;
      this.jogo.quantidade=`${this.store.qtd}`;
 
+      this.open();
+
       this.carregaJogador();
     },
     created(){
 
-       
+        
 
        
       
