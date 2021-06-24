@@ -12,6 +12,7 @@ import Chave8 from './Chave8.vue';
 import Chave16 from './Chave16.vue';
 
 
+
 export default {
   components: { 
     Chave4,
@@ -23,9 +24,12 @@ export default {
    props:{quantidade:Number,
    campeonato:Number
    },
-    mounted(){
-       
-    }
+   data:()=>{
+     return{
+       store:''
+     }
+   },
+   
 
    
 }

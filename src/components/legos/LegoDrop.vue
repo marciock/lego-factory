@@ -50,6 +50,7 @@
          <div class="lego-wrapper lego-height">
                <div class="form-group player">
                  <input type="datetime-local" class="form-control player" ref="dateTime" v-model="jogo.data" >
+                
                 </div>
     
                 <div class="lego-height">
@@ -59,6 +60,7 @@
                 </div>
          </div>
          <toast-message :title="titleToast" :message="messagegeToast" v-show="timeToast===true" :posX="toastX" :posY="toastY"/>
+
     </div>
 </template>
 <script>
@@ -78,7 +80,8 @@ export default {
       referencia1:Number,
       referencia2:Number,
       campeonatos:Number,
-      anterior:Number
+      anterior:Number,
+      
       },
       data:()=>{
         return{
@@ -108,7 +111,7 @@ export default {
       ...mapState(['rodadas','jogadores'])
     },
     methods:{
-      ...mapActions(['rodadaAction','jogadoresAction','campeonatoAction','salvaRodada']),
+      ...mapActions(['jogadoresAction','salvaRodada']),
       carregaJogador(){
       // console.log(this.campeonatos)
        const data={torneio:this.store.torneio}

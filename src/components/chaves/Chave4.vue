@@ -37,6 +37,7 @@ import LegoColchets from '../legos/LegoColchets.vue';
 import LegoCurveDown from '../legos/LegoCurveDown.vue';
 
 
+
 export default {
 
    name:'Chave4',
@@ -44,7 +45,8 @@ export default {
        LegoColchets,
        LegoDrop,
        LegoCurveDown
-   }
+   },
+   
        
 }
 </script>

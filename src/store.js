@@ -9,7 +9,7 @@ export default new Vuex.Store({
         rodadas:'',
         campeonato:'',
         jogadores:[],
-        qtd:'',
+        carregamento:[]
         
 
 
@@ -25,13 +25,10 @@ export default new Vuex.Store({
         mutCampeonato(state,campeonatoAction){
             state.campeonato=campeonatoAction
         },
-        mutQtd(state){
-            if(localStorage.getItem('qtd')){
-                this.replaceState(
-                    Object.assign(state,JSON.parse(localStorage.getItem('qtd')))
-                )
-            }
-        }
+        mutCarregamento(state,carregaRodada){
+            state.carregamento=carregaRodada
+        },
+        
     },
     actions:{
         rodadaAction({commit},payload){
@@ -56,10 +53,7 @@ export default new Vuex.Store({
            } 
            
         },
-        campeonatoAction({commit},payload){
-
-            commit('mutCampeonato',payload);
-        },
+       
         salvaRodada(context,payload){
 
             const data=payload;
@@ -71,6 +65,14 @@ export default new Vuex.Store({
             });
 
             
+        },
+        carregaRodada: async ({commit},payload)=>{
+
+            const data=payload;
+            let result =await Vue.http.post('instituicao/carrega_rodada.php',data);
+
+            //console.log(result.body);
+            commit('mutCarregamento',result.body);
         }
         
        

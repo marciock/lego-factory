@@ -2,7 +2,7 @@
     <div>
      <div class="lego-keys">
       
-        <LegoDrop :rodada="1"/>
+        <LegoDrop :rodada="1" ref="rodada1"/>
      
         <LegoColchets />
 
@@ -54,6 +54,8 @@
           <LegoCurveUp />
         
     </div>
+    
+    
 </div>
 </template>
 <script>
@@ -65,6 +67,8 @@ import LegoCurveDown from '../legos/LegoCurveDown.vue';
 import LegoSpace from '../legos/LegoSpace.vue';
 import LegoCurveUp from '../legos/LegoCurveUp.vue';
 
+
+
 export default {
 
    name:'Chave8',
@@ -72,7 +76,9 @@ export default {
        LegoColchets,LegoDrop,
        LegoCurveDown,LegoSpace,
        LegoCurveUp
-   }
+   },
+   
+  
        
 }
 </script>
