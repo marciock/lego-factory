@@ -79,6 +79,15 @@ export default new Vuex.Store({
            
               
             
+        },
+        updateChaves(context,payload){
+
+            const data=payload;
+            Vue.http.post('instituicao/update_chaves.php',data).then(res=>{
+
+                //commit('mutCarregamento',res.body);
+                console.log(res.body);
+            });
         }
         
        

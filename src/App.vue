@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-   
+    <IconMenuBar :campeonato="store.torneio"/>
      <ChavePrincipal :quantidade="store.qtd" />
    
   </div>
@@ -15,10 +15,12 @@ import 'bootstrap/dist/js/bootstrap.js';*/
 //store.qtd
 
 import ChavePrincipal from './components/chaves/ChavePrincipal.vue';
+import IconMenuBar from './components/widgets/IconMenuBar.vue';
 export default {
   name: 'App',
   components: {
-    ChavePrincipal
+    ChavePrincipal,
+     IconMenuBar
   },
   data:()=>{
     return{
