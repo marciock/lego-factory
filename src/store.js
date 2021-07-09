@@ -9,7 +9,7 @@ export default new Vuex.Store({
         rodadas:'',
         campeonato:'',
         jogadores:[],
-        carregamento:[]
+        carregamento:''
         
 
 
@@ -56,7 +56,7 @@ export default new Vuex.Store({
        
         salvaRodada(context,payload){
 
-            const data=payload;
+            const data=JSON.parse(payload);
 
             console.log(data);
 
@@ -66,18 +66,15 @@ export default new Vuex.Store({
 
             
         },
-        carregaRodada({commit},payload){
+        carregaRodada: async ({commit},payload)=>{
 
             const data=payload;
-            Vue.http.post('instituicao/carrega_rodada.php',data).then(res=>{
-
-                commit('mutCarregamento',res.body);
-                console.log(res.body);
-            });
-
-           // console.log(result.data);
-           
-              
+            let results=await Vue.http.post('instituicao/carrega_rodada.php',data);
+            console.log(results);
+           commit('mutCarregamento',results.data);
+            
+        
+            
             
         },
         updateChaves(context,payload){
