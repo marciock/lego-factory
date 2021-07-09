@@ -1,5 +1,11 @@
 <template>
     <div >
+    
+        <LegoHeader :status="texto" />
+
+    
+
+
      <div class="lego-keys">
       
         <LegoDrop :rodada="1" />
@@ -35,6 +41,7 @@
 import LegoDrop from '../legos/LegoDrop.vue';
 import LegoColchets from '../legos/LegoColchets.vue';
 import LegoCurveDown from '../legos/LegoCurveDown.vue';
+import LegoHeader from '../legos/LegoHeader.vue';
 
 
 
@@ -46,8 +53,16 @@ export default {
    components:{
        LegoColchets,
        LegoDrop,
-       LegoCurveDown
+       LegoCurveDown,
+       LegoHeader
+       
    },
+   data:()=>{
+       return{
+           texto:[ '4ª de Finais', 'Final' , 'Campeão']      
+     
+       }
+   }
   
    
        

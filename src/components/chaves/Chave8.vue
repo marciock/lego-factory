@@ -1,5 +1,6 @@
 <template>
     <div>
+        <LegoHeader :status="texto" />
      <div class="lego-keys">
       
         <LegoDrop :rodada="1" ref="rodada1"/>
@@ -66,7 +67,7 @@ import LegoColchets from '../legos/LegoColchets.vue';
 import LegoCurveDown from '../legos/LegoCurveDown.vue';
 import LegoSpace from '../legos/LegoSpace.vue';
 import LegoCurveUp from '../legos/LegoCurveUp.vue';
-
+import LegoHeader from '../legos/LegoHeader.vue';
 
 
 export default {
@@ -75,8 +76,15 @@ export default {
    components:{
        LegoColchets,LegoDrop,
        LegoCurveDown,LegoSpace,
-       LegoCurveUp
+       LegoCurveUp,
+       LegoHeader
    },
+    data:()=>{
+       return{
+           texto:[ '8ª de Finais','Semifinais', 'Final' , 'Campeão']      
+     
+       }
+   }
    
   
        

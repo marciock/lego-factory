@@ -56,7 +56,7 @@
                 </div>
     
                 <div class="lego-height">
-                    <button type="button" class="btn btn-success rounded-pill " ref="butonSave" v-on:click="save">
+                    <button type="button" :class="btn" ref="butonSave" v-on:click="save">
                         <span class="fa fa-save"> </span>
                     </button>
                 </div>
@@ -94,22 +94,12 @@ export default {
       data:()=>{
         return{
           store:'',
-          jogo:{
-            rodada:'',
-            jogador1:'',
-            pontos1:'0',
-            jogador2:'',
-            pontos2:'0',
-            data:'',
-            campeonato:'',
-            quantidade:'',
-            pontuacao:''
-          },
           titleToast:'',
           messagegeToast:'',
           timeToast:Boolean,
           toastX:'',
           toastY:'',
+          btn:'btn btn-success rounded-pill',
           recebimento:{
              rodada:'',
             jogador1:'',
@@ -210,15 +200,13 @@ export default {
 
            
 
-            if(btn.classList.contains('btn-success')){
+            if(this.btn==='btn btn-success rounded-pill'){
               
                 this.timeToast=true;
                 this.toastX=btn.left;
                 this.toastY=btn.top;
-
+                this.btn='btn btn-dark rounded-pill'
            
-                btn.classList.remove('btn-success');
-                btn.classList.add('btn-dark');
             
                  this.titleToast='Salvando Rodada - '+this.rodada;
                  this.messagegeToast='Rodada salva com sucesso';
@@ -259,7 +247,7 @@ export default {
             const data=payload;
             
              Vue.http.post('instituicao/carrega_rodada.php',data).then(res=>{
-               console.log(res.body)
+             //  console.log(res.body)
                let result=res.body;
                
                switch (result.length) {
@@ -268,7 +256,7 @@ export default {
                    
                    break;
                    case 1:
-                    
+                      this.btn='btn btn-dark rounded-pill';
                      this.recebimento.rodada=result[0].rodada
                      this.recebimento.jogador1=result[0].jogador1
                      this.recebimento.pontos1=result[0].pontos1
@@ -281,7 +269,7 @@ export default {
                    
                    break;
                    case 2:
-                    
+                     this.btn='btn btn-dark rounded-pill';
                      this.recebimento.rodada=result[0].rodada
 
                       this.recebimento.jogador1=result[0].jogador1
@@ -328,9 +316,7 @@ export default {
 
       this.carregaJogador();
       this.carregaRodada({torneio:this.store.torneio,rodada:this.rodada});
-     
-      
-
+ 
      
     },
     

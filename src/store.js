@@ -70,7 +70,7 @@ export default new Vuex.Store({
 
             const data=payload;
             let results=await Vue.http.post('instituicao/carrega_rodada.php',data);
-            console.log(results);
+            //console.log(results);
            commit('mutCarregamento',results.data);
             
         

@@ -64,6 +64,19 @@
                
             </div>
         </div>
+        <div class="lego-wrapper">
+            <div class="lego-height lego-space border-right-1">
+                 
+            </div>
+    
+    
+            <div class="lego-height  lego-space  ">
+               
+            </div>
+             <div class="lego-height  lego-space">
+               
+            </div>
+        </div>
         
        
     </div>
