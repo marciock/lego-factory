@@ -26,7 +26,7 @@
         
                 <div class="form-group lego-height">
                     <input type="text" class="form-control point" ref="pontos1" 
-                    v-on:change="carregaRef()" v-on:click="selectPoint"
+                     v-on:blur="carregaRef" v-on:click="selectPoint"
                      v-model="recebimento.pontos1" v-mask="'###'" >
                 </div>
         
@@ -44,7 +44,7 @@
         
                 <div class="form-group lego-height" v-show="oculta!=='none'">
                     <input type="text" class="form-control point" ref="pontos2" 
-                    v-on:change="carregaRef()" v-on:click="selectPoint"
+                   v-on:blur="carregaRef" v-on:click="selectPoint"
                     v-model="recebimento.pontos2" v-mask="'###'"  >
                 </div>
         
@@ -56,7 +56,7 @@
                 </div>
     
                 <div class="lego-height">
-                    <button type="button" :class="btn" ref="butonSave" v-on:click="save">
+                    <button type="button" :class="btn" ref="buttonSave" v-on:click="save">
                         <span class="fa fa-save"> </span>
                     </button>
                 </div>
@@ -141,26 +141,38 @@ export default {
 
           this.$refs.jogador1.selectedIndex=index1;
           this.$refs.jogador2.selectedIndex=index2;
+          this.btn='btn btn-success rounded-pill';
       },
       carregaRef(){
-        
+        this.btn='btn btn-success rounded-pill';
+       
         const rod=this.rodada;
         const r=document.querySelector(`[anterior="${rod}"]`)
 
         const jogador1=this.$refs.jogador1.selectedIndex;
         const jogador2=this.$refs.jogador2.selectedIndex;
-
+        const valor1=this.$refs.jogador1.options[jogador1].value;
+        const valor2=this.$refs.jogador2.options[jogador2].value;
+        const texto1=this.$refs.jogador1.options[jogador1].text;
+        const texto2=this.$refs.jogador2.options[jogador2].text;
+        
+       
+         
         const pontos1=this.$refs.pontos1.value;
         const pontos2=this.$refs.pontos2.value;
 
         const data=[
           {
             jogador:jogador1,
-            pontos:pontos1
+            pontos:pontos1,
+            valor:valor1,
+            texto:texto1
           },
           {
             jogador:jogador2,
-            pontos:pontos2
+            pontos:pontos2,
+            valor:valor2,
+            texto:texto2
             }
           ]
 
@@ -174,18 +186,28 @@ export default {
           const find=data.find(f=>f.pontos===max)
           
           if(find !==undefined){
-           r.selectedIndex=find.jogador;
-
-            this.recebimento.jogador2=r.value;
+            if(find.jogador !==0){
+              r.selectedIndex=find.jogador;
+               
+                 
+            }else{
+              r.options[0].value=find.valor;
+              r.options[0].text=find.texto;
+               
+               
+            }
            
+
+           // this.recebimento.jogador2=r.value;
+           // this.btn='btn btn-success rounded-pill';
           }
            
-           
+          
                  
       },
       save(e){
 
-          
+        
         const btn=e.target;
 
            // this.jogo.jogador1=this.$refs.jogador1.value;
@@ -253,7 +275,7 @@ export default {
                switch (result.length) {
                  case 0:
                     this.recebimento
-                   
+                   //this.carregaRef();
                    break;
                    case 1:
                       this.btn='btn btn-dark rounded-pill';
@@ -266,6 +288,7 @@ export default {
                      this.convertDate(result[0].data);
                      this.recebimento.campeonato=result[0].campeonato
                      this.recebimento.pontuacao=result[0].pontuacao
+                    
                    
                    break;
                    case 2:
@@ -283,7 +306,7 @@ export default {
                     this.convertDate(result[0].data);
                      this.recebimento.campeonato=result[0].campeonato
                      this.recebimento.pontuacao=result[0].pontuacao
-
+                     // this.carregaRef();
 
                     // this.jogo.pontos1=result[0].pontos1;
                    //  this.jogo.pontos2=result[1].pontos2;
@@ -293,11 +316,18 @@ export default {
                  default:
                    break;
                }
-               
+              
              });
-                 
+                  
             
         },
+        createJoin(){
+          if(this.referencia1){
+            console.log(this.referencia1)
+            console.log(this.rodada)
+          }
+        }
+        
       
     },
     mounted(){
@@ -315,12 +345,14 @@ export default {
     // this.open();
 
       this.carregaJogador();
-      this.carregaRodada({torneio:this.store.torneio,rodada:this.rodada});
- 
-     
+    
+        this.carregaRodada({torneio:this.store.torneio,rodada:this.rodada});
+        
+        this.createJoin();
     },
     
-
+    
+    
     
 }
 </script>

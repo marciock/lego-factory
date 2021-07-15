@@ -3,7 +3,7 @@
         <LegoHeader :status="texto" />
      <div class="lego-keys">
       
-        <LegoDrop :rodada="1" ref="rodada1"/>
+        <LegoDrop :rodada="1" />
      
         <LegoColchets />
 
