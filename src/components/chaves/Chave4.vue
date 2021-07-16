@@ -8,7 +8,7 @@
 
      <div class="lego-keys">
       
-        <LegoDrop :rodada="1" />
+        <LegoDrop :rodada="1" principal="true"/>
      
         <LegoColchets />
         <LegoCurveDown />
@@ -17,19 +17,19 @@
     <div class="lego-keys">
        
             
-            <LegoDrop :rodada="2" />
+            <LegoDrop :rodada="2"  principal="true" />
         
             <LegoColchets />
        
         
-            <LegoDrop :rodada="3" :referencia1="1" :referencia2="2" />
+            <LegoDrop :rodada="3" :referencia1="1" :referencia2="2" read="true"/>
         
             <LegoColchets />
         
         
       <div class="lego-keys">
         
-          <LegoDrop :rodada="4" oculta="none" :referencia1="3" :referencia2="3"/>
+          <LegoDrop :rodada="4" oculta="none" :referencia1="3" :referencia2="3" final="true" read="true"/>
       
           
         

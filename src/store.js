@@ -43,11 +43,11 @@ export default new Vuex.Store({
              const data=payload.data;   
             const url=payload.url;
 
-          
+           // console.log(data);
            if(data.torneio !==undefined){
         
            let result= await Vue.http.post(url,data);
-
+            
           
            commit('mutJogadores',result.data);
            } 
@@ -80,10 +80,11 @@ export default new Vuex.Store({
         updateChaves(context,payload){
 
             const data=payload;
+            console.log(data);
             Vue.http.post('instituicao/update_chaves.php',data).then(res=>{
 
                 //commit('mutCarregamento',res.body);
-                console.log(res.body);
+                console.log(res);
             });
         }
         

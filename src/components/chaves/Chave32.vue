@@ -3,7 +3,7 @@
     <LegoHeader :status="texto" />
      <div class="lego-keys">
       
-        <LegoDrop :rodada="1" />
+        <LegoDrop :rodada="1" principal="true" />
      
         <LegoColchets />
         <LegoCurveDown />
@@ -12,11 +12,11 @@
     <div class="lego-keys">
        
             
-            <LegoDrop :rodada="2" />
+            <LegoDrop :rodada="2" principal="true" />
         
             <LegoColchets />
 
-             <LegoDrop :rodada="17" :referencia1="1" :referencia2="2" />
+             <LegoDrop :rodada="17" :referencia1="1" :referencia2="2" read="true"/>
         
             <LegoColchets />
             <LegoCurveDown />
@@ -25,14 +25,14 @@
         
     <div class="lego-keys">
     
-        <LegoDrop :rodada="3" />
+        <LegoDrop :rodada="3" principal="true" />
 
         <LegoColchets />
         <LegoCurveDown />
 
         <LegoSpace />
         <LegoSpace />
-         <LegoDrop :rodada="25" :referencia1="17" :referencia2="18" />
+         <LegoDrop :rodada="25" :referencia1="17" :referencia2="18" read="true"/>
         
             <LegoColchets />
             <LegoCurveDown />
@@ -42,11 +42,11 @@
     </div>
      <div class="lego-keys">
     
-        <LegoDrop :rodada="4" />
+        <LegoDrop :rodada="4" principal="true" />
 
         <LegoColchets />
 
-         <LegoDrop :rodada="18" :referencia1="3" :referencia2="4" />
+         <LegoDrop :rodada="18" :referencia1="3" :referencia2="4" read="true"/>
         
         <LegoColchets />
         <LegoCurveUp />
@@ -66,7 +66,7 @@
     </div>
      <div class="lego-keys">
     
-        <LegoDrop :rodada="5" />
+        <LegoDrop :rodada="5" principal="true"/>
 
         <LegoColchets />
         <LegoCurveDown />
@@ -78,7 +78,7 @@
              <LegoSpace />
              <LegoSpace />
             
-            <LegoDrop :rodada="29" :referencia1="25" :referencia2="26" />
+            <LegoDrop :rodada="29" :referencia1="25" :referencia2="26" read="true"/>
              <LegoColchets />
              <LegoCurveDown />
 
@@ -89,10 +89,10 @@
     </div>
      <div class="lego-keys">
     
-        <LegoDrop :rodada="6" />
+        <LegoDrop :rodada="6" principal="true" />
 
         <LegoColchets />
-         <LegoDrop :rodada="19" :referencia1="5" :referencia2="6" />
+         <LegoDrop :rodada="19" :referencia1="5" :referencia2="6" read="true"/>
          <LegoColchets />
          <LegoCurveDown />
              <LegoSpace />
@@ -111,14 +111,14 @@
     </div>
      <div class="lego-keys">
     
-        <LegoDrop :rodada="7" />
+        <LegoDrop :rodada="7" principal="true"/>
 
         <LegoColchets />
         <LegoCurveDown />
 
         <LegoSpace />
         <LegoSpace />
-         <LegoDrop :rodada="26" :referencia1="19" :referencia2="20" />
+         <LegoDrop :rodada="26" :referencia1="19" :referencia2="20" read="true"/>
     
         <LegoColchets />
         <LegoCurveUp />
@@ -131,10 +131,10 @@
     </div>
      <div class="lego-keys">
     
-        <LegoDrop :rodada="8" />
+        <LegoDrop :rodada="8" principal="true"/>
 
         <LegoColchets />
-         <LegoDrop :rodada="20 " :referencia1="7" :referencia2="8" />
+         <LegoDrop :rodada="20 " :referencia1="7" :referencia2="8" read="true"/>
          <LegoColchets />
          <LegoCurveUp />
 
@@ -150,7 +150,7 @@
     </div>
      <div class="lego-keys">
     
-        <LegoDrop :rodada="9" />
+        <LegoDrop :rodada="9" principal="true"/>
 
         <LegoColchets />
         <LegoCurveDown />
@@ -164,19 +164,19 @@
         <LegoSpace />
         <LegoSpace />
 
-        <LegoDrop :rodada="31" :referencia1="29" :referencia2="30" />
+        <LegoDrop :rodada="31" :referencia1="29" :referencia2="30" read="true"/>
         <LegoColchets />
-        <LegoDrop :rodada="32" :referencia1="31" :referencia2="31" oculta="none" />
+        <LegoDrop :rodada="32" :referencia1="31" :referencia2="31" oculta="none" final="true" read="true"/>
         
         
             
     </div>
      <div class="lego-keys">
     
-        <LegoDrop :rodada="10" />
+        <LegoDrop :rodada="10" principal="true"/>
 
         <LegoColchets />
-         <LegoDrop :rodada="21" :referencia1="9" :referencia2="10" />
+         <LegoDrop :rodada="21" :referencia1="9" :referencia2="10" read="true"/>
          <LegoColchets />
          <LegoCurveDown />
 
@@ -193,14 +193,14 @@
     </div>
     <div class="lego-keys">
     
-        <LegoDrop :rodada="11" />
+        <LegoDrop :rodada="11" principal="true"/>
 
         <LegoColchets />
         <LegoCurveDown />
 
         <LegoSpace />
         <LegoSpace />
-         <LegoDrop :rodada="27" :referencia1="21" :referencia2="22" />
+         <LegoDrop :rodada="27" :referencia1="21" :referencia2="22" read="true"/>
         
         <LegoColchets />
         <LegoCurveDown />
@@ -214,10 +214,10 @@
     </div>
      <div class="lego-keys">
     
-        <LegoDrop :rodada="12" />
+        <LegoDrop :rodada="12" principal="true"/>
 
         <LegoColchets />
-         <LegoDrop :rodada="22" :referencia1="11" :referencia2="12" />
+         <LegoDrop :rodada="22" :referencia1="11" :referencia2="12" read="true"/>
          <LegoColchets />
          <LegoCurveUp />
 
@@ -238,7 +238,7 @@
     </div>
      <div class="lego-keys">
     
-        <LegoDrop :rodada="13" />
+        <LegoDrop :rodada="13" principal="true"/>
 
         <LegoColchets />
         <LegoCurveDown />
@@ -248,17 +248,17 @@
         <LegoSpace />
         <LegoSpace />
         <LegoSpace />
-        <LegoDrop :rodada="30" :referencia1="27" :referencia2="28" />
+        <LegoDrop :rodada="30" :referencia1="27" :referencia2="28" read="true"/>
          <LegoColchets />
           <LegoCurveUp />
             
     </div>
      <div class="lego-keys">
     
-        <LegoDrop :rodada="14" />
+        <LegoDrop :rodada="14" principal="true"/>
 
         <LegoColchets />
-         <LegoDrop :rodada="23" :referencia1="13" :referencia2="14" />
+         <LegoDrop :rodada="23" :referencia1="13" :referencia2="14" read="true"/>
          <LegoColchets />
          <LegoCurveDown />
 
@@ -270,14 +270,14 @@
     </div>
      <div class="lego-keys">
     
-        <LegoDrop :rodada="15" />
+        <LegoDrop :rodada="15" principal="true"/>
 
         <LegoColchets />
         <LegoCurveDown />
 
         <LegoSpace />
         <LegoSpace />
-         <LegoDrop :rodada="28" :referencia1="23" :referencia2="24" />
+         <LegoDrop :rodada="28" :referencia1="23" :referencia2="24" read="true"/>
         
         <LegoColchets />
         <LegoCurveUp />
@@ -286,10 +286,10 @@
     </div>
      <div class="lego-keys">
     
-        <LegoDrop :rodada="16" />
+        <LegoDrop :rodada="16" principal="true"/>
 
         <LegoColchets />
-         <LegoDrop :rodada="24" :referencia1="15" :referencia2="16" />
+         <LegoDrop :rodada="24" :referencia1="15" :referencia2="16" read="true"/>
          <LegoColchets />
          <LegoCurveUp />
             

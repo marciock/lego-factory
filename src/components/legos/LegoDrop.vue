@@ -15,18 +15,22 @@
         <div class="lego-wrapper">
            
                 <div class="form-group lego-height">
-                   <select class="form-control player" data-id="jogador1" ref="jogador1" :anterior="referencia1" >
-                     <option :value="recebimento.jogador1">{{recebimento.nome1}}</option>
+                   <select class="form-control player" data-id="jogador1" ref="jogador1" :anterior="referencia1" v-if="!read" :data-principal="principal" v-on:change="nameValidate">
+                     <option value="recebimento.jogador1">{{recebimento.nome1}}</option>
                      <option  v-for="(j,i) in jogadores " :key="i" :value="j.id">{{j.nome}}</option>
-                     
+                  </select>
 
-                   </select>
+                   <select class="form-control player" data-id="jogador1" ref="jogador1" :anterior="referencia1" v-if="read==='true'" readOnly>
+                     <option :value="recebimento.jogador1">{{recebimento.nome1}}</option>
+                      
+                     
+                  </select>
                 </div>
         
         
                 <div class="form-group lego-height">
                     <input type="text" class="form-control point" ref="pontos1" 
-                     v-on:blur="carregaRef" v-on:click="selectPoint"
+                    v-on:click="selectPoint" :pontoanterior="referencia1" :pontua="final"
                      v-model="recebimento.pontos1" v-mask="'###'" >
                 </div>
         
@@ -34,17 +38,26 @@
          <div class="lego-wrapper">
            
                 <div class="form-group lego-height" v-show="oculta !=='none'" >
-                 <select class="form-control player" data-id="jogador2"  ref="jogador2" :anterior="referencia2"  >
+                 <select class="form-control player" data-id="jogador2"  ref="jogador2" :anterior="referencia2"  v-if="!read" :data-principal="principal" v-on:change="nameValidate">
                     <option :value="recebimento.jogador2">{{recebimento.nome2}}</option>
                    <option v-for="(j,i) in jogadores " :key="i" :value="j.id">{{j.nome}}</option>
                    
                  </select> 
+
+                  
+                 <select class="form-control player" data-id="jogador2"  ref="jogador2" :anterior="referencia2"  v-if="read==='true'" readOnly>
+                    <option :value="recebimento.jogador2">{{recebimento.nome2}}</option>
+                   
+                   
+                 </select> 
+
+
                 </div>
         
         
                 <div class="form-group lego-height" v-show="oculta!=='none'">
                     <input type="text" class="form-control point" ref="pontos2" 
-                   v-on:blur="carregaRef" v-on:click="selectPoint"
+                  v-on:click="selectPoint"
                     v-model="recebimento.pontos2" v-mask="'###'"  >
                 </div>
         
@@ -66,7 +79,7 @@
            <input type="text" class="form-control player" ref="pontuacao" v-model="recebimento.pontuacao"  >
          </div>
          <toast-message :title="titleToast" :message="messagegeToast" v-show="timeToast===true" :posX="toastX" :posY="toastY"/>
-     
+        <DialogBox :title="titleToast" :message="messagegeToast" v-show="timeDialog===true" :posX="toastX" :posY="toastY" />
     </div>
 </template>
 <script>
@@ -75,11 +88,13 @@
    import Vue from 'vue';
    
    import ToastMessage from '../widgets/ToastMessage.vue';
+   import DialogBox from '../widgets/DialogBox.vue';
 
 export default {
     name:'LegoDrop',
     components:{
-      ToastMessage
+      ToastMessage,
+      DialogBox
     },
     props:{
       rodada:Number,
@@ -88,6 +103,11 @@ export default {
       referencia2:Number,
       campeonatos:Number,
       anterior:Number,
+      pontoanterior:Number,
+      final:String,
+      pontua:String,
+      read:String,
+      principal:String
      
       
       },
@@ -112,7 +132,8 @@ export default {
             campeonato:'',
             quantidade:'',
             pontuacao:''
-          }
+          },
+          timeDialog:Boolean
          
                   
          
@@ -126,7 +147,7 @@ export default {
       ...mapActions(['jogadoresAction','salvaRodada']),
       carregaJogador(){
       // console.log(this.campeonatos)
-       const data={torneio:this.store.torneio}
+       const data={torneio:this.store.torneio,empresa:this.store.empresa}
         const url='instituicao/jogadores.php';
         const payload={url:url,data:data}
         this.jogadoresAction(payload);
@@ -141,13 +162,15 @@ export default {
 
           this.$refs.jogador1.selectedIndex=index1;
           this.$refs.jogador2.selectedIndex=index2;
-          this.btn='btn btn-success rounded-pill';
+          //this.btn='btn btn-success rounded-pill';
       },
       carregaRef(){
-        this.btn='btn btn-success rounded-pill';
+        //this.btn='btn btn-success rounded-pill';
        
         const rod=this.rodada;
         const r=document.querySelector(`[anterior="${rod}"]`)
+        const p=document.querySelector(`[pontoanterior="${rod}"]`)
+      
 
         const jogador1=this.$refs.jogador1.selectedIndex;
         const jogador2=this.$refs.jogador2.selectedIndex;
@@ -180,22 +203,34 @@ export default {
           const val2=data[1].pontos;
 
           let max=Math.max(val1,val2);
+         // let maxNumber=max;
 
           max=`${max}`;
 
           const find=data.find(f=>f.pontos===max)
           
           if(find !==undefined){
+
             if(find.jogador !==0){
-              r.selectedIndex=find.jogador;
+             // r.selectedIndex=find.jogador;
+              r.options[0].value=find.valor;
+              r.options[0].text=find.texto;
+              if(p !== null && p.getAttribute('pontua')==='true'){
+                p.value=max;
+              }
+
                
                  
             }else{
               r.options[0].value=find.valor;
               r.options[0].text=find.texto;
                
-               
+               if(p !== null && p.getAttribute('pontua')==='true'){
+                p.value=max;
+              }
             }
+
+            
            
 
            // this.recebimento.jogador2=r.value;
@@ -207,7 +242,7 @@ export default {
       },
       save(e){
 
-        
+        this.carregaRef();
         const btn=e.target;
 
            // this.jogo.jogador1=this.$refs.jogador1.value;
@@ -326,6 +361,41 @@ export default {
             console.log(this.referencia1)
             console.log(this.rodada)
           }
+        },
+        nameValidate(e){
+            const validates=document.querySelectorAll('[data-principal="true"]');
+            const index=e.target.value;
+           
+             let container=[];
+
+            validates.forEach(f=>{
+              const select=f.selectedIndex;
+              const opt=f.options[select];
+              container.push({text:opt.text,value:opt.value});
+            })
+            
+           // console.log(container)
+            const filter=container.filter(f=>{
+              if(f.value===index){
+                return f;
+              }
+            });
+            if(filter.length ===2){
+              console.log(filter);
+              this.timeDialog=true;
+               
+
+                 this.titleToast='Jogador já selecionado';
+                 this.messagegeToast=`O Jogador ${filter[0].text} já foi selecionado em outra rodada!`;
+
+                 setTimeout(()=>{
+                    this.timeDialog=false;
+                    e.target.selectedIndex=0;
+                },2000)
+
+            }else{
+              this.timeDialog=false;
+            }
         }
         
       
