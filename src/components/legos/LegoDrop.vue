@@ -16,15 +16,15 @@
            
                 <div class="form-group lego-height">
                    <select class="form-control player" data-id="jogador1" ref="jogador1" :anterior="referencia1" v-if="!read" :data-principal="principal" v-on:change="nameValidate">
-                     <option value="recebimento.jogador1">{{recebimento.nome1}}</option>
+                     <option :value="recebimento.jogador1">{{recebimento.nome1}}</option>
                      <option  v-for="(j,i) in jogadores " :key="i" :value="j.id">{{j.nome}}</option>
                   </select>
-
-                   <select class="form-control player" data-id="jogador1" ref="jogador1" :anterior="referencia1" v-if="read==='true'" readOnly>
+                  <select class="form-control player" data-id="jogador1" ref="jogador1" :anterior="referencia1" v-if="read==='true'" readOnly>
                      <option :value="recebimento.jogador1">{{recebimento.nome1}}</option>
-                      
-                     
+
+
                   </select>
+                   
                 </div>
         
         
@@ -43,13 +43,13 @@
                    <option v-for="(j,i) in jogadores " :key="i" :value="j.id">{{j.nome}}</option>
                    
                  </select> 
-
-                  
-                 <select class="form-control player" data-id="jogador2"  ref="jogador2" :anterior="referencia2"  v-if="read==='true'" readOnly>
+                  <select class="form-control player" data-id="jogador2"  ref="jogador2" :anterior="referencia2"  v-if="read==='true'" readOnly>
                     <option :value="recebimento.jogador2">{{recebimento.nome2}}</option>
-                   
-                   
-                 </select> 
+
+
+                 </select>
+                  
+               
 
 
                 </div>
@@ -89,6 +89,7 @@
    
    import ToastMessage from '../widgets/ToastMessage.vue';
    import DialogBox from '../widgets/DialogBox.vue';
+
 
 export default {
     name:'LegoDrop',
@@ -207,6 +208,13 @@ export default {
 
           max=`${max}`;
 
+        if(val1 !==val2){
+
+          
+
+
+
+          
           const find=data.find(f=>f.pontos===max)
           
           if(find !==undefined){
@@ -229,12 +237,24 @@ export default {
                 p.value=max;
               }
             }
-
+          }
             
            
 
            // this.recebimento.jogador2=r.value;
            // this.btn='btn btn-success rounded-pill';
+          }else{
+            console.log('empate');
+            this.timeDialog=true;
+               
+
+                 this.titleToast='Rodada Com Empate';
+                 this.messagegeToast=`Os Jogadores ${texto1} e ${texto2} Empataram!`;
+
+                 setTimeout(()=>{
+                    this.timeDialog=false;
+                   // e.target.selectedIndex=0;
+                },5000)
           }
            
           
@@ -242,7 +262,7 @@ export default {
       },
       save(e){
 
-        this.carregaRef();
+        
         const btn=e.target;
 
            // this.jogo.jogador1=this.$refs.jogador1.value;
@@ -250,6 +270,8 @@ export default {
 
             this.recebimento.jogador1=this.$refs.jogador1.value;
             this.recebimento.jogador2=this.$refs.jogador2.value;
+
+            
 
            // console.log(JSON.stringify(this.jogo));
             // this.salvaRodada(JSON.stringify(this.jogo));
@@ -284,7 +306,7 @@ export default {
                     this.timeToast=false;
                 },2000)
             }
-         
+         this.carregaRef();
       },
       convertDate(data){
 
@@ -306,7 +328,7 @@ export default {
              Vue.http.post('instituicao/carrega_rodada.php',data).then(res=>{
              //  console.log(res.body)
                let result=res.body;
-               
+               console.log(res.data);
                switch (result.length) {
                  case 0:
                     this.recebimento
