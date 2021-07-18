@@ -63,8 +63,9 @@ export default {
 
            const data={torneio:this.campeonato,quantidade:this.chaves}
            this.updateChaves(data);
-
-           window.location.reload();
+            let url=`cadastro/torneiojogadores/${this.campeonato}`;
+           window.location.href=url;
+          
            
        },
       

@@ -32,11 +32,11 @@
 }
 .border-all{
     border: 1px solid #000 !important;
-    padding: 20px;
+    padding: 1rem 2rem 1rem 2rem;
     margin-bottom: 5px;
 }
 .width-header{
-    width: 13%;
+    width:23rem;
     text-align: center;
 }
 .header-wrapper{
@@ -57,4 +57,4 @@
 
 }
 
-    
+  

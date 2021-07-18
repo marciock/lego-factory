@@ -48,13 +48,9 @@
 
 
                  </select>
-                  
-               
-
-
+        
                 </div>
-        
-        
+                
                 <div class="form-group lego-height" v-show="oculta!=='none'">
                     <input type="text" class="form-control point" ref="pontos2" 
                   v-on:click="selectPoint"
@@ -79,7 +75,7 @@
            <input type="text" class="form-control player" ref="pontuacao" v-model="recebimento.pontuacao"  >
          </div>
          <toast-message :title="titleToast" :message="messagegeToast" v-show="timeToast===true" :posX="toastX" :posY="toastY"/>
-        <DialogBox :title="titleToast" :message="messagegeToast" v-show="timeDialog===true" :posX="toastX" :posY="toastY" />
+        <DialogBox :title="titleToast" :message="messagegeToast" v-show="timeDialog===true" :top="top" />
     </div>
 </template>
 <script>
@@ -134,10 +130,10 @@ export default {
             quantidade:'',
             pontuacao:''
           },
-          timeDialog:Boolean
-         
-                  
-         
+          timeDialog:Boolean,
+          top:'',
+          
+          
         }
       },
 
@@ -208,12 +204,8 @@ export default {
 
           max=`${max}`;
 
-        if(val1 !==val2){
-
+        if(val1 !== val2 && max !=='0'){
           
-
-
-
           
           const find=data.find(f=>f.pontos===max)
           
@@ -264,20 +256,25 @@ export default {
 
         
         const btn=e.target;
-
-           // this.jogo.jogador1=this.$refs.jogador1.value;
-           // this.jogo.jogador2=this.$refs.jogador2.value;
+         this.carregaRef();
 
             this.recebimento.jogador1=this.$refs.jogador1.value;
             this.recebimento.jogador2=this.$refs.jogador2.value;
+            
+            console.log(this.recebimento.jogador1);
+            const val1=this.recebimento.pontos1;  
+            const val2=this.recebimento.pontos2;  
+
 
             
 
-           // console.log(JSON.stringify(this.jogo));
-            // this.salvaRodada(JSON.stringify(this.jogo));
+           if(val1 !==val2 || (parseInt(val1)+parseInt(val2))===0  ){
+// && this.recebimento.jogador1===undefined && this.recebimento.jogador2===undefined 
+
+          if( this.recebimento.jogador1){
              this.salvaRodada(JSON.stringify(this.recebimento));
 
-           
+            
 
             if(this.btn==='btn btn-success rounded-pill'){
               
@@ -294,7 +291,6 @@ export default {
                     this.timeToast=false;
                 },2000)
             }else{
-
                 //  this.salvaRodada(this.jogo);
                 this.timeToast=true;
                 this.toastX=btn.left;
@@ -306,7 +302,36 @@ export default {
                     this.timeToast=false;
                 },2000)
             }
-         this.carregaRef();
+          }else{
+          
+             this.titleToast='Rodada Não Salva';
+                 this.messagegeToast=`Ao menos o Campo Do Primeiro Jogador Deve Ser Preenchido!`;
+          }
+        }
+        else{
+            console.log('empate');
+
+            const texto1=this.$refs.jogador1.options[this.$refs.jogador1.selectedIndex].text;
+            const texto2=this.$refs.jogador2.options[this.$refs.jogador2.selectedIndex].text;
+
+            this.timeDialog=true;
+            this.timeToast=true;
+
+                this.toastX=btn.left;
+                this.toastY=btn.top;
+
+                this.top=btn.top;
+        
+                 this.titleToast='Rodada Com Empate';
+                 this.messagegeToast=`Os Jogadores ${texto1} e ${texto2} Empataram!`;
+
+                 setTimeout(()=>{
+                    this.timeDialog=false;
+                     this.timeToast=false;
+                   // e.target.selectedIndex=0;
+                },5000)
+          }
+        
       },
       convertDate(data){
 
@@ -328,7 +353,7 @@ export default {
              Vue.http.post('instituicao/carrega_rodada.php',data).then(res=>{
              //  console.log(res.body)
                let result=res.body;
-               console.log(res.data);
+              // console.log(res.data);
                switch (result.length) {
                  case 0:
                     this.recebimento
@@ -378,12 +403,7 @@ export default {
                   
             
         },
-        createJoin(){
-          if(this.referencia1){
-            console.log(this.referencia1)
-            console.log(this.rodada)
-          }
-        },
+        
         nameValidate(e){
             const validates=document.querySelectorAll('[data-principal="true"]');
             const index=e.target.value;
@@ -403,7 +423,7 @@ export default {
               }
             });
             if(filter.length ===2){
-              console.log(filter);
+              //console.log(filter);
               this.timeDialog=true;
                
 
@@ -440,7 +460,7 @@ export default {
     
         this.carregaRodada({torneio:this.store.torneio,rodada:this.rodada});
         
-        this.createJoin();
+       
     },
     
     

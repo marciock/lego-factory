@@ -1,5 +1,5 @@
 <template>
-    <div ref="toast" class="dialogs-float ">
+    <div ref="toast" class="dialogs-float " :style="{top:top}">
       <div class="card text-center dialogs-border shadow p-3 mb-5 bg-white rounded" style="width:25rem;" >
        <h5 class="card-title"> <strong>{{title}}</strong></h5>
        <p class="card-text">{{message}}</p>
@@ -16,7 +16,7 @@
 
 export default {
     name:'DialogBox',
-    props:['title','message'],
+    props:['title','message','top'],
     mounted(){
 
        // const x=this.posX;
@@ -32,9 +32,9 @@ export default {
     .dialogs-float{
         position: absolute;
         z-index: 9;
-       left:50%;
+       left:65%;
       
-       top:25%;
+      
 
 
     }

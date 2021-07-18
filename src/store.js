@@ -58,7 +58,7 @@ export default new Vuex.Store({
 
             const data=JSON.parse(payload);
 
-            console.log(data);
+          //  console.log(data);
 
             Vue.http.post('instituicao/salvapartida.php',data).then(res=>{
                 console.log(res);
@@ -70,7 +70,7 @@ export default new Vuex.Store({
 
             const data=payload;
             let results=await Vue.http.post('instituicao/carrega_rodada.php',data);
-            console.log(results.data);
+           // console.log(results.data);
            commit('mutCarregamento',results.data);
             
         

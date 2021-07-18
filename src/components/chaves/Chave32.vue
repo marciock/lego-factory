@@ -102,7 +102,7 @@
 
             
             <LegoSpace />
-            <LegoSpace style="width:12.3rem;" />   
+            <LegoSpace style="width:12.4rem;" />   
                       
             <LegoLine />
 
@@ -227,7 +227,9 @@
         <LegoLine />
 
         <LegoSpace />
-        <LegoSpace style="width:12.4rem;"  />
+        
+        <LegoSpace style="width:12.5rem;" />
+     
       
 
         <LegoLine />
