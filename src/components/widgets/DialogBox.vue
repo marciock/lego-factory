@@ -32,8 +32,8 @@ export default {
     .dialogs-float{
         position: absolute;
         z-index: 9;
-       left:65%;
-      
+       left:20vw;
+      transform: translate(-10%, -10%);
       
 
 

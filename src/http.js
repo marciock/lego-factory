@@ -5,9 +5,9 @@ Vue.use(VueResource);
 
 export const http=Vue.http;
 
-http.options.root='https://alvarengaesportes.com.br';
+http.options.root='http://localhost';
 
-
+//'https://www.alvarengaesportes.com.br'
 //'https://alvarengaesportes.com.br'    
 
 //'http://localhost'

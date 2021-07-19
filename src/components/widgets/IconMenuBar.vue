@@ -17,7 +17,7 @@
                                 <option value="16">16</option>
                                 <option value="32">32</option>
                                 <option value="64">64</option>
-                                <option value="80">80</option>
+                                
                             </select>
                         </div>
                         <div class="row justify-content-center">

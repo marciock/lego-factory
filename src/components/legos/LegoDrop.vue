@@ -3,7 +3,7 @@
       
       <div class="lego-wrapper">
         <div class="lego-height">
-               <h4><strong>Rodada -{{rodada}} </strong></h4>
+               <h4><strong>Jogo {{rodada}} </strong></h4>
           </div>
 
     
@@ -15,11 +15,11 @@
         <div class="lego-wrapper">
            
                 <div class="form-group lego-height">
-                   <select class="form-control player" data-id="jogador1" ref="jogador1" :anterior="referencia1" v-if="!read" :data-principal="principal" v-on:change="nameValidate">
+                   <select :data-rodada="rodada" class="form-control form-control-sm player" data-id="jogador1" ref="jogador1" :anterior="referencia1" v-if="!read" :data-principal="principal" v-on:change="nameValidate">
                      <option :value="recebimento.jogador1">{{recebimento.nome1}}</option>
                      <option  v-for="(j,i) in jogadores " :key="i" :value="j.id">{{j.nome}}</option>
                   </select>
-                  <select class="form-control player" data-id="jogador1" ref="jogador1" :anterior="referencia1" v-if="read==='true'" readOnly>
+                  <select :data-rodada="rodada" class="form-control form-control-sm player" data-id="jogador1" ref="jogador1" :anterior="referencia1" v-if="read==='true'" readOnly>
                      <option :value="recebimento.jogador1">{{recebimento.nome1}}</option>
 
 
@@ -29,7 +29,7 @@
         
         
                 <div class="form-group lego-height">
-                    <input type="text" class="form-control point" ref="pontos1" 
+                    <input type="text" class="form-control form-control-sm point" ref="pontos1" 
                     v-on:click="selectPoint" :pontoanterior="referencia1" :pontua="final"
                      v-model="recebimento.pontos1" v-mask="'###'" >
                 </div>
@@ -38,12 +38,12 @@
          <div class="lego-wrapper">
            
                 <div class="form-group lego-height" v-show="oculta !=='none'" >
-                 <select class="form-control player" data-id="jogador2"  ref="jogador2" :anterior="referencia2"  v-if="!read" :data-principal="principal" v-on:change="nameValidate">
+                 <select :data-rodada="rodada" class="form-control form-control-sm  player" data-id="jogador2"  ref="jogador2" :anterior="referencia2"  v-if="!read" :data-principal="principal" v-on:change="nameValidate">
                     <option :value="recebimento.jogador2">{{recebimento.nome2}}</option>
                    <option v-for="(j,i) in jogadores " :key="i" :value="j.id">{{j.nome}}</option>
                    
                  </select> 
-                  <select class="form-control player" data-id="jogador2"  ref="jogador2" :anterior="referencia2"  v-if="read==='true'" readOnly>
+                  <select :data-rodada="rodada" class="form-control form-control-sm player" data-id="jogador2"  ref="jogador2" :anterior="referencia2"  v-if="read==='true'" readOnly>
                     <option :value="recebimento.jogador2">{{recebimento.nome2}}</option>
 
 
@@ -52,7 +52,7 @@
                 </div>
                 
                 <div class="form-group lego-height" v-show="oculta!=='none'">
-                    <input type="text" class="form-control point" ref="pontos2" 
+                    <input type="text" class="form-control form-control-sm point" ref="pontos2" 
                   v-on:click="selectPoint"
                     v-model="recebimento.pontos2" v-mask="'###'"  >
                 </div>
@@ -60,7 +60,7 @@
          </div>
          <div class="lego-wrapper lego-height">
                <div class="form-group player">
-                 <input type="datetime-local" class="form-control player" ref="dateTime" v-model="recebimento.data"  >
+                 <input type="datetime-local" class="form-control form-control-sm player" ref="dateTime" v-model="recebimento.data"  >
                 
                 </div>
     
@@ -72,7 +72,7 @@
                 
          </div>
          <div class="lego-wrapper lego-height">
-           <input type="text" class="form-control player" ref="pontuacao" v-model="recebimento.pontuacao"  >
+           <input type="text" class="form-control form-control-sm player" ref="pontuacao" v-model="recebimento.pontuacao"  >
          </div>
          <toast-message :title="titleToast" :message="messagegeToast" v-show="timeToast===true" :posX="toastX" :posY="toastY"/>
         <DialogBox :title="titleToast" :message="messagegeToast" v-show="timeDialog===true" :top="top" />
@@ -130,6 +130,19 @@ export default {
             quantidade:'',
             pontuacao:''
           },
+          proximo:{
+             rodada:'',
+            jogador1:'',
+            pontos1:'0',
+            nome1:'',
+            jogador2:'',
+            pontos2:'0',
+            nome2:'',
+            data:'',
+            campeonato:'',
+            quantidade:'',
+            pontuacao:''
+          },
           timeDialog:Boolean,
           top:'',
           
@@ -175,11 +188,18 @@ export default {
         const valor2=this.$refs.jogador2.options[jogador2].value;
         const texto1=this.$refs.jogador1.options[jogador1].text;
         const texto2=this.$refs.jogador2.options[jogador2].text;
-        
-       
-         
+     
+        this.proximo.jogador1=jogador1;
+        this.proximo.jogador2=jogador2;
+     
         const pontos1=this.$refs.pontos1.value;
         const pontos2=this.$refs.pontos2.value;
+
+        
+        this.proximo.rodada=r.getAttribute('data-rodada');
+        const anteriores=document.querySelectorAll(`[data-rodada="${this.proximo.rodada}"]`);
+        
+        console.log(anteriores[0].getAttribute('data-id'));
 
         const data=[
           {
@@ -213,13 +233,20 @@ export default {
 
             if(find.jogador !==0){
              // r.selectedIndex=find.jogador;
+             
               r.options[0].value=find.valor;
               r.options[0].text=find.texto;
               if(p !== null && p.getAttribute('pontua')==='true'){
                 p.value=max;
               }
-
-               
+              if(r.getAttribute('data-id')==='jogador1'){
+                this.proximo.jogador1=find.valor;
+              }
+              if(r.getAttribute('data-id')==='jogador2'){
+                this.proximo.jogador2=find.valor;
+              }
+              
+               console.log(this.proximo);
                  
             }else{
               r.options[0].value=find.valor;
@@ -227,7 +254,21 @@ export default {
                
                if(p !== null && p.getAttribute('pontua')==='true'){
                 p.value=max;
+                //this.recebimento.pontos1=max;
               }
+
+              if(r.getAttribute('data-id')==='jogador1'){
+                
+                this.proximo.jogador1=find.valor;
+                this.proximo.jogador2=anteriores[1].value;
+              }
+              if(r.getAttribute('data-id')==='jogador2'){
+                this.proximo.jogador1=anteriores[0].value;
+                this.proximo.jogador2=find.valor;
+                
+              }
+              
+               console.log(this.proximo);
             }
           }
             
@@ -256,12 +297,16 @@ export default {
 
         
         const btn=e.target;
-         this.carregaRef();
+
+        if(this.final !=='true'){
+             this.carregaRef();
+        }
+        
 
             this.recebimento.jogador1=this.$refs.jogador1.value;
             this.recebimento.jogador2=this.$refs.jogador2.value;
             
-            console.log(this.recebimento.jogador1);
+          //  console.log(this.recebimento.jogador1);
             const val1=this.recebimento.pontos1;  
             const val2=this.recebimento.pontos2;  
 
@@ -273,6 +318,11 @@ export default {
 
           if( this.recebimento.jogador1){
              this.salvaRodada(JSON.stringify(this.recebimento));
+
+
+             this.salvaRodada(JSON.stringify(this.proximo));
+
+              
 
             
 
@@ -319,8 +369,8 @@ export default {
 
                 this.toastX=btn.left;
                 this.toastY=btn.top;
-
-                this.top=btn.top;
+                  let top=parseInt(btn.top)*(-1);
+                this.top=`${top}`;
         
                  this.titleToast='Rodada Com Empate';
                  this.messagegeToast=`Os Jogadores ${texto1} e ${texto2} Empataram!`;
@@ -334,6 +384,11 @@ export default {
         
       },
       convertDate(data){
+         //1969-12-31T21:00
+        /* let d=data;
+         if(d==='1969-12-31T21:00'){
+           d=null;
+         }*/
 
           let today = new Date(data);
             let date = today.getFullYear() + '-' +
@@ -453,6 +508,11 @@ export default {
      this.recebimento.rodada=`${this.rodada}`;
      this.recebimento.campeonato=`${this.store.torneio}`;
      this.recebimento.quantidade=`${this.store.qtd}`;
+
+
+   
+    this.proximo.campeonato=`${this.store.torneio}`;
+    this.proximo.quantidade=`${this.store.qtd}`;
 
     // this.open();
 
