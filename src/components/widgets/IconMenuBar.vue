@@ -8,20 +8,12 @@
 
             <div class="card" ref="formatoModal"  v-show="modal">
                 <div class="card-body">
-                        <div class="form-group row justify-content-center">
-                            <label for="qtd">Escolha o Formato da Chave</label>
-                            <select class="form-control" id="formato" v-model="chaves">
-                                <option value=""></option>
-                                <option value="4">4</option>
-                                <option value="8">8</option>
-                                <option value="16">16</option>
-                                <option value="32">32</option>
-                                <option value="64">64</option>
-                                
-                            </select>
+                    <div class="form-group row justify-content-center" style="padding:12px;">
+                            Modifique o Formato da Chave
+                           
                         </div>
                         <div class="row justify-content-center">
-                            <button class="btn btn-success" v-on:click="updateFormato">Atualizar</button>
+                            <button class="btn btn-success" v-on:click="updateFormato">Modificar</button>
                         </div>
                 </div>
 
@@ -56,7 +48,7 @@ export default {
            }else{
                 this.modal=true;
            }
-         console.log(this.campeonato)
+        // console.log(this.campeonato)
           
        },
        updateFormato(){
